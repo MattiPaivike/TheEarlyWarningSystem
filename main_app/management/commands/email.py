@@ -7,7 +7,6 @@ from users.models import CustomUser, Subscriptions
 import sys
 import logging
 
-
 import os
 import json
 
@@ -55,7 +54,7 @@ class Command(BaseCommand):
         if job_type == "new_version":
             logging.info("Compiling new version email for application: " + app_name + " version: " + app_version)
             subject = "Version " + app_version + " of application: " + app_name + " has been released!"
-            body = "Version " + app_version + " of application: " + app_name + " has been released! \n\nDownload the new version from here: " + app_website + "\n\nThis email was brought to you by the Early Warning System."
+            body = "Version " + app_version + " of application: " + app_name + " has been released! \n\nDownload the new version from here: " + app_website + "\n\nThis email was brought to you by the Early Warning System.\n\nIf you want to stop receiving emails from this service then just sign in and delete your account."
             #search subscriptions and append users
             subscriptions = Subscriptions.objects.filter(app_subscriptions=app_name)
             if subscriptions:
