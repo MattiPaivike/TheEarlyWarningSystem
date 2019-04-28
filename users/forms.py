@@ -42,7 +42,3 @@ class ProfileUpdateForm(forms.Form):
                 self.fields[field_name] = forms.BooleanField(required=False, initial=True)
             else:
                 self.fields[field_name] = forms.BooleanField(required=False)
-
-#class CustomAuthenticationForm(AuthenticationForm):
-#    def clean_email(self):
-#        return self.cleaned_data['username'].lower()

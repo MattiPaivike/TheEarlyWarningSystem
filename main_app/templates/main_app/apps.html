@@ -1,7 +1,6 @@
 {% extends "main_app/base.html"%}
 {% load static %}
 {% block content %}
-<!-- JUMBOTRON -->
 {% if user.is_authenticated == False %}
 <div class="jumbotron">
   <h2>The Early Warning System</h2>
@@ -13,15 +12,6 @@
     <h5 class="border-bottom border-gray pb-2 mb-0">Currently detected software versions:</h5>
   <div class="row">
   {% for app in applications %}
-  <!--
-  <div class="media pt-3">
-    <img class="img app-img" src="{% static "" %}main_app/{{app.software}}.jpg">
-    <span class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-      <h5 class="text-gray-dark d-inline">{{ app.software }} </h5>
-      <h5 class="text-black d-inline font-weight-bold">{{ app.version }}</h5>
-    </span>
-  </div>
-  -->
   <div class="col-md-4 border-bottom border-gray">
     <div class="media pt-3">
         <img class="img app-img" src="{% static "" %}main_app/{{app.software}}.jpg">
@@ -36,29 +26,4 @@
   <small class="d-block text-right mt-3">
     <a href="{% url 'profile' %}">Edit subscriptions</a>
   </small>
-  <!--
-  <nav aria-label="Page navigation">
-  {% if applications.has_other_pages %}
-    <ul class="pagination justify-content-center">
-      {% if applications.has_previous %}
-        <li class="page-item"><a class="page-link" href="?page={{ applications.previous_page_number }}">&laquo;</a></li>
-      {% else %}
-        <li class="page-item disabled"><a class="page-link">&laquo;</a></li>
-      {% endif %}
-      {% for i in applications.paginator.page_range %}
-        {% if applications.number == i %}
-          <li class="page-item active"><a class="page-link">{{ i }} <a class="sr-only page-link">(current)</a></a></li>
-        {% else %}
-          <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-        {% endif %}
-      {% endfor %}
-      {% if applications.has_next %}
-        <li class="page-item"><a class="page-link" href="?page={{ applications.next_page_number }}">&raquo;</a></li>
-      {% else %}
-        <li class="disabled page-item"><a class="page-link">&raquo;</a></li>
-      {% endif %}
-    </ul>
-  {% endif %}
-  </nav>
-  -->
   {% endblock content %}
