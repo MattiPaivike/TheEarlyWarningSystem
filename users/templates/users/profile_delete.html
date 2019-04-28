@@ -1,0 +1,16 @@
+{% extends "main_app/base.html"%}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <h6 class="border-bottom border-gray pb-2 mb-2">Delete Account:</h6>
+                <h2>Are you sure?</h2>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+                <a class="btn btn-outline-secondary" href="{% url 'change_password' %}" >Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

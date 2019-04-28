@@ -1,0 +1,14 @@
+/* icon sizing for home page app-list */
+.app-img {
+  height: 30px;
+  width: 40px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+
+
+/* display stuff on login page inline */
+.small-inline {
+  display: inline;
+}

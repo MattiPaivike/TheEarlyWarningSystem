@@ -1,0 +1,8 @@
+{% extends "main_app/base.html"%}
+{% load static %}
+{% block content %}
+  <h6>A confirmation message has been sent to your email!</h6>
+  <div class="border-top pt-3">
+      No email found? Please check your spam folder or <a href="{% url 'resend_activation' key=key %}">Resend Email</a>
+  </div>
+{% endblock content %}

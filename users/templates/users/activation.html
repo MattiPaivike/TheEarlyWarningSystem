@@ -1,0 +1,10 @@
+{% extends "main_app/base.html"%}
+{% load static %}
+{% block content %}
+  <h2>Your account has been activated!</h2>
+  <div class="border-top pt-3">
+    <small class="text-muted">
+      Click Here to<a class="ml-2" href="{% url 'login' %}">Sign In</a>
+    </small>
+  </div>
+{% endblock content %}
