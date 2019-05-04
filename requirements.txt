@@ -9,6 +9,7 @@ Django==2.1.5
 django-crispy-forms==1.7.2
 django-registration==3.0
 django-use-email-as-username==1.0.1
+djangorestframework==3.9.3
 fake-useragent==0.1.11
 idna==2.8
 lxml==4.3.0

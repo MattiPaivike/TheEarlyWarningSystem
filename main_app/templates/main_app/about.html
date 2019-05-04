@@ -4,6 +4,23 @@
   <p>This tool was created to help system administrators keep track of common enterprise software updates. This automated system is constantly crawling software vendor websites for the latest version data. Once a new version is detected an automated email is sent to the list of accounts who have subscribed to that specific software. Users can choose which application version changes they want to notified of. Users can change their subscriptions at any time. If you no longer want to receive emails from this site then just sign in and delete your account.</p>
   <h5>How often does the system check for version changes?</h5>
   <p>The system checks vendor websites every 6 hours.</p>
+  <h5>Get the software information via API</h5>
+  <p>You can access the API from: <a href="https://www.earlywarningsys.net/api/versions/?format=json">this link.</a></p> <p>Below you will find an example of how to access the information via python script:</p>
+  <figure class="highlight">
+    <pre>
+import requests
+
+url = "https://www.earlywarningsys.net/api/versions/?format=json"
+response = requests.get(url)
+json = response.json()
+
+for key in json:
+  if key['software'] == 'Citrix Receiver':
+      print(key["version"])
+
+4.12
+    </pre>
+  </figure>
   <h5>About the author:</h5>
   <p>I am a system administrator who has always wanted to learn web development. This is my first personal project.</p>
   <h5>Privacy policy:</h5>

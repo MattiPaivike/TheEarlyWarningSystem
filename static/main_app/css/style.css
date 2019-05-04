@@ -6,7 +6,10 @@
   margin-bottom: 16px;
 }
 
-
+.highlight
+{
+  background-color:#f8f9fa;
+}
 
 /* display stuff on login page inline */
 .small-inline {
