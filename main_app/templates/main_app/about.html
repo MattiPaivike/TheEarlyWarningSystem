@@ -1,30 +1,22 @@
 {% extends "main_app/base.html"%}
 {% block content %}
   <h4 class="border-bottom border-gray pb-2 mb-2">About The Early Warning System:</h4>
-  <p>This tool was created to help system administrators keep track of common enterprise software updates. This automated system is constantly crawling software vendor websites for the latest version data. Once a new version is detected an automated email is sent to the list of accounts who have subscribed to that specific software. Users can choose which application version changes they want to notified of. Users can change their subscriptions at any time. If you no longer want to receive emails from this site then just sign in and delete your account.</p>
+  <p>This tool was created to help system administrators keep track of common enterprise software updates. This automated system is constantly crawling software vendor websites for the latest version data. Once a new version of some software is detected an automated email is sent to the list of accounts who have subscribed to that specific software. Users can choose which application version changes they want to notified of. Users can change their "subscriptions" at any time.</p>
   <h5>How often does the system check for version changes?</h5>
   <p>The system checks vendor websites every 6 hours.</p>
   <h5>Get the software information via API</h5>
   <p>You can access the API from: <a href="https://www.earlywarningsys.net/api/versions/?format=json">this link.</a></p> <p>Below you will find an example of how to access the information via python script:</p>
-  <figure class="highlight">
-    <pre>
-import requests
-
-url = "https://www.earlywarningsys.net/api/versions/?format=json"
-response = requests.get(url)
-json = response.json()
-
-for key in json:
-  if key['software'] == 'Citrix Receiver':
-      print(key["version"])
-
-4.12
-    </pre>
-  </figure>
-  <h5>About the author:</h5>
+  <div class="card">
+  <div class="card-body">
+    <p class="card-text">import requests</p>
+    <p></p>
+    <p class="card-text">url = "https://www.earlywarningsys.net/api/versions/?format=json"<br>response = requests.get(url)<br>json = response.json()</p>
+    <p class="card-text">for key in json:<br>&nbsp;&nbsp;&nbsp;&nbsp;if key['software'] == 'Citrix Receiver':<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(key["version"])</p>
+    <p class="card-text">4.12</p>
+  </div>
+</div>
+  <h5 class="pt-4">About the author:</h5>
   <p>I am a system administrator who has always wanted to learn web development. This is my first personal project.</p>
-  <h5>Privacy policy:</h5>
-  <p>All passwords and emails are stored securely. The Early Warning System will never share your information with anyone. Only emails regarding software updates, activation and maintenance will be sent to you.</p>
   <h5>Contact:</h5>
-  <p>Found a bug? Would you like me to add some software here for tracking? Just contact me at: <a href="mailto:earlywarningsyste@gmail.com">earlywarningsyste@gmail.com</a> and I will take a look at it.</p>
+  <p>Found a bug? Would you like me to add some software here for tracking? Just contact me and I will take a look at it.</p>
 {% endblock %}

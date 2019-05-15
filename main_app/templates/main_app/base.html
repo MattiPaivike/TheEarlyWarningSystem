@@ -1,20 +1,22 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+<div class="wrapper">
+  <div id="main">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
+  <link rel="icon" href="{% static "main_app/favicon.ico" %}"/>
   <title>Early Warning System</title>
   <!-- Bootstrap core CSS -->
   <link href="{% static 'main_app/css/bootstrap.min.css' %}" rel="stylesheet">
 
   <!-- Custom styles for this template -->
   <link href="{% static 'main_app/css/style.css' %}" rel="stylesheet">
-
 </head>
-<body class="bg-light">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<body class="bg-white">
+  <nav class="navbar-default navbar navbar-expand-lg navbar-dark bg-dark">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -78,22 +80,33 @@
       </ul>
     </div>
   </nav>
-
-
-  <main role="main" class="container">
+  <main role="main">
     {% if messages %}
     {% for message in messages %}
-    <div class="alert alert-{{ message.tags }}">
+    <div class="container alert alert-{{ message.tags }}">
       {{ message }}
     </div>
     {% endfor %}
     {% endif %}
-    <div class="container">
-      <div class="my-3 p-3 bg-white rounded shadow-sm">
+    {% if page == 'home' %}
+    <div class="jumbotron">
+      <div class="container">
+        <h2>The Early Warning System</h2>
+        <p class="lead">... a web application that helps system administrators keep track of software updates for {{ appscount }} common enterprise applications. Choose which software updates
+          you would like to be notified of and the system will send an automated email for you once a new version is detected. You can also access all software data via an <a href="https://www.earlywarningsys.net/api/versions/">API</a>. All for free!</p>
+          <p><a class="btn btn-lg btn-success" href="{% url 'register' %}" role="button">Sign up today</a></p>
+        </div>
+      </div>
+    {% endif %}
+      <div class="container">
         {% block content %}{% endblock %}
       </div>
-    </div>
   </main>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="{% static 'main_app/js/bootstrap.bundle.min.js' %}"></script>
+</div>
+</div>
+<footer class="footer text-center text-white">
+  <p>The Early Warning System</p>
+</footer>
   </html>

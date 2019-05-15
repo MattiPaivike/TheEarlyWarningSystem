@@ -2,28 +2,21 @@
 {% load static %}
 {% block content %}
 {% if user.is_authenticated == False %}
-<div class="jumbotron">
-  <h2>The Early Warning System</h2>
-  <p class="lead">... a web application that helps system administrators keep track of software updates for {{ appscount }} common enterprise applications. Choose which software updates
-    you would like to be notified of and the system will send an automated email for you once a new version is detected. You can also access all software data via an <a href="https://www.earlywarningsys.net/api/versions/">API</a>. All for free!</p>
-    <p><a class="btn btn-lg btn-success" href="{% url 'register' %}" role="button">Sign up today</a></p>
-  </div>
-{% endif %}
-    <h5 class="border-bottom border-gray pb-2 mb-0">Currently detected software versions:</h5>
+  {% endif %}
+  <div class="container">
+  <h4 class="pb-2 mb-0">Currently detected software versions:</h4>
   <div class="row">
-  {% for app in applications %}
-  <div class="col-md-4 border-bottom border-gray">
-    <div class="media pt-3">
+    {% for app in applications %}
+    <div class="col-md-4">
+      <div class="media pt-3">
         <img class="img app-img" src="{% static "" %}main_app/{{app.software}}.jpg">
         <span class="media-body pb-3 mb-0 small lh-125">
           <h6 class="">{{ app.software }}</h6>
           <h6 class="text-black d-inline font-weight-bold">{{ app.version }}</h6>
         </span>
+      </div>
     </div>
+    {% endfor %}
   </div>
-  {% endfor %}
   </div>
-  <small class="d-block text-right mt-3">
-    <a href="{% url 'profile' %}">Edit subscriptions</a>
-  </small>
   {% endblock content %}

@@ -1,3 +1,29 @@
+html, body {
+  height: 100%;
+}
+
+.wrapper {
+  min-height: 100%;
+}
+
+#main {
+  overflow:auto;
+  padding-bottom:150px; /* this needs to be bigger than footer height*/
+}
+
+main {
+  padding-top:16px;
+}
+
+.footer {
+  background-color: rgb(33, 37, 41);
+  position: relative;
+  margin-top: -60px; /* negative value of footer height */
+  height: 60px;
+  clear:both;
+  padding-top:20px;
+}
+
 /* icon sizing for home page app-list */
 .app-img {
   height: 30px;
