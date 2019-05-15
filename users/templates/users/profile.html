@@ -2,17 +2,17 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h6 class="border-bottom border-gray pb-2 mb-0">Start by choosing the applications you would like to be notified of and click "save changes" at the bottom of the page.</h6>
+    <h6 class="pb-2 mb-0">Start by choosing the applications you would like to be notified of and click "save changes" at the bottom of the page.</h6>
     <form method="POST">
       {% csrf_token %}
     <div class="row">
       {% for field in form %}
-        <div class="col-md-4 border-bottom border-gray">
+        <div class="col-md-4">
           <div class="media pt-3">
-              <img class="img app-img" src="{% static "" %}main_app/{{ field.id_for_label|slice:"3:" }}.jpg">
-              <p class="media-body pb-3 mb-0 small lh-125">
-                <strong class="d-block text-gray-dark">{{ field }} {{ field.label_tag }} </strong>
-              </p>
+            <img class="img app-img" src="{% static "" %}main_app/{{ field.id_for_label|slice:"3:" }}.jpg">
+            <p class="media-body pb-3 mb-0 small lh-125">
+              <strong class="d-block text-gray-dark">{{ field }} {{ field.label_tag }} </strong>
+            </p>
           </div>
         </div>
       {% endfor %}
