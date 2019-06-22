@@ -39,7 +39,7 @@ class Command(BaseCommand):
             logging.info('sniffing through the html for regex pattern')
             divs = page_soup.find("div", {"id": "downloadDetails"})
 
-            r = '\d\.\d\.\d{1,2}'
+            r = '\d\.\d\.\d{1,2}\.{0,1}\d{0,1}'
 
             versions_list = re.findall(r, str(divs))
 
