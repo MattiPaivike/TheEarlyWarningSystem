@@ -34,13 +34,17 @@ class Command(BaseCommand):
             logging.info('making the soup for url: ' + url)
             page_soup = soup(page_html, "html.parser")
 
-            versions_list = []
+            r = '\d\d\.\d.\d{1,2}'
+
+            templist = []
 
             logging.info('sniffing through the html for regex pattern')
             repElemList = page_soup.findAll("html", class_="windows x86 no-js")
             for repElem in repElemList:
                 repElemID = repElem.get('data-esr-versions')
-                versions_list.append(repElemID)
+                templist.append(repElemID)
+
+            versions_list = re.findall(r, str(templist))
 
             #if list empty. send error message
             if not versions_list:
