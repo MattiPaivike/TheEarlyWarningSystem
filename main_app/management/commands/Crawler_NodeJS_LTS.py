@@ -38,13 +38,15 @@ class Command(BaseCommand):
 
             versions_list = []
 
-            r = '\d{0,2}\.\d{0,2}\.\d{0,2}'
+            r = '\d{0,2}\.\d{0,2}\.\d{0,2} LTS'
 
             logging.info('sniffing through the html for regex pattern')
 
-            repElemList = page_soup.find("html")
+            repElemList = page_soup.find("a", {"class": "home-downloadbutton"})
 
             versions_list = re.findall(r, str(repElemList))
+
+            versions_list = [w.replace(' LTS', '') for w in versions_list]
 
             #if list empty. send error message
             if not versions_list:

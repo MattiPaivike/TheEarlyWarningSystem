@@ -14,8 +14,8 @@ class Command(BaseCommand):
         logfilename = logfiledir + appname + ".log"
         logging.basicConfig(filename=logfilename,level=logging.DEBUG,format = '%(asctime)s  %(levelname)-10s %(processName)s  %(name)s %(message)s')
         #define our main url
-        url = "https://keepass.info/"
-        downloadURL = url
+        url = "https://sourceforge.net/projects/keepass/files/KeePass%202.x/"
+        downloadURL = "https://keepass.info/"
 
         #headers to mimick an actual uClient
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
@@ -41,9 +41,11 @@ class Command(BaseCommand):
             logging.info('sniffing through the html for regex pattern')
             divs = page_soup.find("html")
 
-            r = '\d\.\d\d'
+            r = '\d\.\d\d\.{0,1}\d{0,1}'
 
-            versions_list = re.findall(r, str(divs))
+            repElemList = page_soup.findAll("tr", {"class": "folder"})
+
+            versions_list = re.findall(r, str(repElemList))
 
             #if list empty. send error message
             if not versions_list:
