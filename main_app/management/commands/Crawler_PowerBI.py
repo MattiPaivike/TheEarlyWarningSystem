@@ -14,8 +14,8 @@ class Command(BaseCommand):
         logfilename = logfiledir + appname + ".log"
         logging.basicConfig(filename=logfilename,level=logging.DEBUG,format = '%(asctime)s  %(levelname)-10s %(processName)s  %(name)s %(message)s')
         #define our main url
-        url = "https://www.microsoft.com/en-us/download/details.aspx?id=45331"
-        downloadURL = "https://www.microsoft.com/en-us/download/details.aspx?id=45331"
+        url = "https://www.microsoft.com/en-us/download/details.aspx?id=58494"
+        downloadURL = "https://www.microsoft.com/en-us/download/details.aspx?id=58494"
 
         #headers to mimick an actual uClient
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
