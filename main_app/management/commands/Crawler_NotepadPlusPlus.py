@@ -38,15 +38,17 @@ class Command(BaseCommand):
 
             versions_list = []
 
-            r = '\d\.\d\S*'
+            r = '\d\.\d\.{0,1}\d{0,1}'
 
             logging.info('sniffing through the html for regex pattern')
-            repElemList = page_soup.findAll("h1")
+            repElemList = page_soup.findAll("a")
 
 
             for repElem in repElemList:
-                versions_list = re.findall(r, str(repElem.text))
-            
+                temp_list = re.search(r, str(repElem.text))
+                if temp_list:
+                    versions_list.append(temp_list.group(0))
+
             #if list empty. send error message
             if not versions_list:
                 logging.info('The regex pattern did not seem to hit any matches. Something is wrong with your crawler.')

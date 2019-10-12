@@ -36,7 +36,7 @@ class Command(BaseCommand):
 
             versions_list = []
 
-            divs = page_soup.find("h4", {"id": "download"})
+            divs = page_soup.find("h3", {"id": "download"})
 
             r = '\d\.\d*\.\d*'
 
