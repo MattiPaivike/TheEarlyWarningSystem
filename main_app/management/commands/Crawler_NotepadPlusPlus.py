@@ -14,7 +14,7 @@ class Command(BaseCommand):
         logfilename = logfiledir + appname + ".log"
         logging.basicConfig(filename=logfilename,level=logging.DEBUG,format = '%(asctime)s  %(levelname)-10s %(processName)s  %(name)s %(message)s')
         #define our main url
-        url = "https://notepad-plus-plus.org/download/"
+        url = "http://download.notepad-plus-plus.org/repository/7.x/"
         downloadURL = url
 
         #headers to mimick an actual uClient
