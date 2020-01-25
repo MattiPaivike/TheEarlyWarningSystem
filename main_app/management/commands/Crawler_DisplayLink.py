@@ -40,6 +40,8 @@ class Command(BaseCommand):
 
             versions_list.append(repElemList.text)
 
+            versions_list = [w.replace('Release: ', '') for w in versions_list]
+
             #if list empty. send error message
             if not versions_list:
                 logging.info('The regex pattern did not seem to hit any matches. Something is wrong with your crawler.')
