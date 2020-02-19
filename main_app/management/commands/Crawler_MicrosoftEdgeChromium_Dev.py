@@ -46,10 +46,8 @@ class Command(BaseCommand):
             jsoni = json.loads(jsoni)
 
             for key in jsoni:
-                if key["Product"] == 'Stable':
-                    #print(key["Releases"][0])
+                if key["Product"] == 'Dev':
                     for k in key["Releases"]:
-                        #print(json.dumps(k, indent=4, sort_keys=True))
                         if k["Platform"] == "Windows":
                             versions_list.append(k["ProductVersion"])
 
