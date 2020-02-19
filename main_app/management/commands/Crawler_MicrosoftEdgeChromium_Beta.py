@@ -38,17 +38,18 @@ class Command(BaseCommand):
 
             versions_list = []
 
-            divs = page_soup.findAll("li", {"class": "c-menu-item"})
+            divs = page_soup.findAll("div", {"class": "c-download"})
 
             for div in divs:
-                spans = div.findAll("span")
-                for span in spans:
-                    findp = span.find("p")
-                    if findp:
-                        if "Beta" in findp.text:
-                            versions_list.append(findp.text)
+                jsoni = (div['data-whole-json'])
 
-            versions_list = [w.replace('Beta ', '') for w in versions_list]
+            jsoni = json.loads(jsoni)
+
+            for key in jsoni:
+                if key["Product"] == 'Beta':
+                    for k in key["Releases"]:
+                        if k["Platform"] == "Windows":
+                            versions_list.append(k["ProductVersion"])
 
             #if list empty. send error message
             if not versions_list:
