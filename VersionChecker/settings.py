@@ -142,8 +142,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_URL = '/static/'
+if os.environ.get('DJANGO_DEVELOPMENT'):
+    STATIC_URL = '/static/'
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    STATIC_URL = '/static/'
 
 #EMAIL settings
 EMAIL_HOST = config['EMAIL_HOSTNAME']
