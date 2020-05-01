@@ -27,9 +27,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ['178.62.240.252', 'www.earlywarningsys.net', 'earlywarningsys.net']
+if os.environ.get('DJANGO_DEVELOPMENT'):
+    DEBUG = True
+    ALLOWED_HOSTS = ['192.168.0.111']
+else:
+    DEBUG = False
+    ALLOWED_HOSTS = ['178.62.240.252', 'www.earlywarningsys.net', 'earlywarningsys.net']
 
 
 # Application definition
@@ -84,16 +87,24 @@ WSGI_APPLICATION = 'VersionChecker.wsgi.application'
 dbuser = config['DBUSER']
 dbpass = config['DBPASS']
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'versionchecker',
-        'USER': dbuser,
-        'PASSWORD': dbpass,
-        'HOST': 'localhost',
-        'PORT': '',
+if os.environ.get('DJANGO_DEVELOPMENT'):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'versionchecker',
+            'USER': dbuser,
+            'PASSWORD': dbpass,
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
