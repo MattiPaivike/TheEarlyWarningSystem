@@ -35,7 +35,7 @@ SECRET_KEY = config['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 if os.environ.get('DJANGO_DEVELOPMENT'):
     DEBUG = True
-    ALLOWED_HOSTS = [config['IP_ADDRESS'],'127.0.0.1']
+    ALLOWED_HOSTS = ['127.0.0.1']
 else:
     DEBUG = False
     ALLOWED_HOSTS = ['178.62.240.252', 'www.earlywarningsys.net', 'earlywarningsys.net']
