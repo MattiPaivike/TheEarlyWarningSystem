@@ -1,22 +1,51 @@
 {% extends "main_app/base.html"%}
 {% load static %}
 {% block content %}
-{% if user.is_authenticated == False %}
-  {% endif %}
-  <div class="container">
-  <h4 class="pb-2 mb-0">Currently detected software versions:</h4>
-  <div class="row">
+  <h4>Currently detected software data:</h4>
+  <table>
+  <tbody class="hide_mobile">
+    <tr>
+      <th>Software:</th>
+      <th>Version:</th>
+      <th>Download link:</th>
+      <th>Checksum:</th>
+      <th>Updated:</th>
+    </tr>
     {% for app in applications %}
-    <div class="col-md-4">
-      <div class="media pt-3">
-        <img class="img app-img" src="{% static "" %}main_app/{{app.software}}.jpg">
-        <span class="media-body pb-3 mb-0 small lh-125">
-          <h6 class="">{{ app.software }}</h6>
-          <h6 class="text-black d-inline font-weight-bold">{{ app.version }}</h6>
-        </span>
-      </div>
-    </div>
+      {% if forloop.counter|divisibleby:2 %}
+    <tr class="row" style='cursor: pointer; cursor: hand;' onclick="window.location='api/versions/{{ app.id }}';">
+          <td>{{ app.software }}</td>
+          <td>{{ app.version }}</td>
+          {% if app.dllink or app.dllink_x86 or app.dllink_x64%}
+            <td>True</td>
+          {% else %}
+            <td>False</td>
+          {% endif %}
+          {% if app.checksum or app.checksum_x86 or app.checksum_x64%}
+            <td>True</td>
+          {% else %}
+            <td>False</td>
+          {% endif %}
+          <td>{{ app.lastupdated }}</td>
+    </tr>
+        {% else %}
+      <tr class="second row" style='cursor: pointer; cursor: hand;' onclick="window.location='api/versions/{{ app.id }}';">
+            <td>{{ app.software }}</td>
+            <td>{{ app.version }}</td>
+            {% if app.dllink or app.dllink_x86 or app.dllink_x64%}
+              <td>True</td>
+            {% else %}
+              <td>False</td>
+            {% endif %}
+            {% if app.checksum or app.checksum_x86 or app.checksum_x64%}
+              <td>True</td>
+            {% else %}
+              <td>False</td>
+            {% endif %}
+            <td>{{ app.lastupdated }}</td>
+      </tr>
+        {% endif %}
     {% endfor %}
-  </div>
-  </div>
+  </tbody>
+  </table>
   {% endblock content %}

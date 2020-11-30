@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 class Software(models.Model):
     name = models.CharField(max_length=50)
 
@@ -12,6 +11,17 @@ class Software(models.Model):
 
 class Version(models.Model):
     version = models.CharField(max_length=50)
+    dllink = models.CharField(max_length=300, blank=True)
+    dllink_x86 = models.CharField(max_length=300, blank=True)
+    dllink_x64 = models.CharField(max_length=300, blank=True)
+
+    checksum = models.CharField(max_length=300, blank=True)
+    checksum_x86 = models.CharField(max_length=300, blank=True)
+    checksum_x64 = models.CharField(max_length=300, blank=True)
+    checksum_type = models.CharField(max_length=50, blank=True)
+
+    lastupdated = models.CharField(max_length=50, blank=True)
+
     software = models.ForeignKey(Software, on_delete=models.CASCADE)
 
     class Meta:

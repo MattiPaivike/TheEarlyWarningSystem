@@ -1,0 +1,8 @@
+{% extends "main_app/base.html"%}
+{% block content %}
+{% load static %}
+  <h2 class="margin_top_30">About The Early Warning System web-crawler bot:</h2>
+  <p>This bot is checking common third-party application websites for version information, download links and checksum data for downloaded files. The bot runs only twice a day.</p>
+  <p>This bot helps your users keep their software up to date.</p>
+  <p>This bot is a part of an open-source project. Read more about it <a href="{% url 'app-about' %}">here</a>.</p>
+{% endblock %}

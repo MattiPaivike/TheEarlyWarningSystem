@@ -14,8 +14,7 @@ class UserRegisterForm(UserCreationForm):
 
     #Override of save method for saving both User and Profile objects
     def save(self, datas):
-        u = CustomUser.objects.create_user(datas['email'],
-                                     datas['password1'])
+        u = CustomUser.objects.create_user(datas['email'], datas['password1'])
         u.is_active = False
         u.save()
         profile=Profile()
@@ -26,9 +25,7 @@ class UserRegisterForm(UserCreationForm):
         profile.save()
         return u
 
-
-apps = Version.objects.all()
-
+apps = Software.objects.all()
 
 class ProfileUpdateForm(forms.Form):
     def __init__(self, *args, **kwargs):
@@ -36,9 +33,12 @@ class ProfileUpdateForm(forms.Form):
         User_name = CustomUser.objects.get(email=str(self.request.user))
         super(ProfileUpdateForm, self).__init__(*args, **kwargs)
         for app in apps:
-            field_name = str(app.software)
+            field_name = str(app)
             #if user has subscribed set checkbox to true
-            if User_name.subscriptions_set.filter(app_subscriptions=str(app.software)).exists():
+            if User_name.subscriptions_set.filter(app_subscriptions=str(app)).exists():
                 self.fields[field_name] = forms.BooleanField(required=False, initial=True)
             else:
                 self.fields[field_name] = forms.BooleanField(required=False)
+
+class ContactForm(forms.Form):
+    text = forms.CharField(widget=forms.Textarea)

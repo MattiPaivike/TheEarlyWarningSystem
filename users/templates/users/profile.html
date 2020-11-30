@@ -2,22 +2,24 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h6 class="pb-2 mb-0">Start by choosing the applications you would like to be notified of and click "save changes" at the bottom of the page.</h6>
+    <h6 class="margin_top_30">Here you can choose which applications updates you will receive email notifications from. Select the desired applications and click "save changes" at the bottom of the page.</h6>
     <form method="POST">
       {% csrf_token %}
-    <div class="row">
+      <table>
+        <tbody>
       {% for field in form %}
-        <div class="col-md-4">
-          <div class="media pt-3">
-            <img class="img app-img" src="{% static "" %}main_app/{{ field.id_for_label|slice:"3:" }}.jpg">
-            <p class="media-body pb-3 mb-0 small lh-125">
-              <strong class="d-block text-gray-dark">{{ field }} {{ field.label_tag }} </strong>
-            </p>
-          </div>
-        </div>
+        {% if forloop.counter|divisibleby:2 %}
+          <tr class="clickselect row">
+                <td>{{ field }} {{ field.label }}</td>
+          </tr>
+        {% else %}
+            <tr class="clickselect second row">
+                <td>{{ field }} {{ field.label }}</td>
+            </tr>
+        {% endif %}
       {% endfor %}
-    </div>
-      <button class="btn btn-outline-info mt-3" type="submit">Save Changes</button>
+      </tbody>
+    </table>
+      <button class="button margin_top_15" type="submit">Save Changes</button>
     </form>
-
 {% endblock content %}

@@ -18,19 +18,18 @@ from django.contrib.auth import views as auth_views
 from django.urls import include, path
 from users import views as user_views
 
-#import class based views
-
 urlpatterns = [
     path('', include('main_app.urls')),
-    path('admin/', admin.site.urls),
+    path('settings/', admin.site.urls),
     path('register/', user_views.register, name='register'),
-    path('register/<key>/email_sent', user_views.email_sent, name='email_sent'),
+    path('register/<email>/email_sent', user_views.email_sent, name='email_sent'),
     path('activation/<key>', user_views.activation, name='activation'),
-    path('activation/<key>/resend', user_views.resend_activation, name='resend_activation'),
+    path('activation/<email>/resend', user_views.resend_activation, name='resend_activation'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('profile/', user_views.profile, name='profile'),
     path('profile/change_password', user_views.change_password, name='change_password'),
     path('profile/delete', user_views.profile_delete, name='profile_delete'),
+    path('contact/', user_views.contact, name='contact'),
     path('login/', user_views.login_view, name='login'),
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='password_reset/password_reset_form.html'), name='password_reset'),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='password_reset/password_reset_done.html'), name='password_reset_done'),

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div class="body" style="text-align: center; font-style: normal; font-weight: 300; width: 90%; margin: auto; color: #0db523; background-color: black; font-size: 12px;">
+    {% if job_type == 'new_version' %}
+      <h2>Version: {{ app_version }} for application: {{ app_name }} has been released!</h2>
+    {% endif %}
+    {% if job_type == 'error' %}
+      <h1>ERROR scraping application: {{ app_name }} !</h1>
+      <p>The following errors appeared:</p>
+      {% for er in errors %}
+        <p>{{ er }}</p>
+      {% endfor %}
+    {% endif %}
+    {% if job_type == 'contact' %}
+      <h1>User: {{ user_text }} sent a contact form.</h1>
+      <p>{{ contact_text }}</p>
+    {% endif %}
+    {% if job_type == 'activation' %}
+      <h2>This is your activation link for The Early Warning System:</h2>
+      <p><a href={{ body }}>{{ body }}<a></p>
+    {% endif %}
+    {% if job_type == 'Run_All' %}
+      <h2>HeartBeat from the earlywarningsystem.</h2>
+      <p>{{ body }}</p>
+    {% endif %}
+    {% if job_type == 'New_App' %}
+      <h2>New software: {{ app_name }} has been added to the Early Warning System for tracking!</h2>
+      <p>{{ body }}</p>
+    {% endif %}
+    <br>
+    {% if job_type == 'new_version' %}
+      {% if dllink %}
+        <p>The following download link was detected:</p>
+        <p>{{ dllink }}</p>
+        {% if checksum %}
+          <p>Checksum: {{ checksum }}</p>
+        {% endif %}
+      {% endif %}
+      {% if dllink_x86 %}
+        <p>The following 32-bit download link was detected:</p>
+        <p>{{ dllink_x86 }}</p>
+        {% if checksum_x86 %}
+          <p>Checksum: {{ checksum_x86 }}</p>
+        {% endif %}
+      {% endif %}
+      {% if dllink_x64 %}
+        <p>The following 64-bit download link was detected:</p>
+        <p>{{ dllink_x64 }}</p>
+          {% if checksum_x64 %}
+            <p>Checksum: {{ checksum_x64 }}</p>
+          {% endif %}
+      {% endif %}
+    {% endif %}
+    <br>
+    {% if job_type == 'new_version' %}
+      <p>This message was delivered to you by The Early Warning System. <a href="https://www.earlywarningsys.net/login">https://www.earlywarningsys.net</a>. Created by: Matti Päivike</p>
+      <p>If you would like to stop receiving emails from this service then just sign in at: <a href="https://www.earlywarningsys.net/login">https://www.earlywarningsys.net/login</a> and delete your account.<p>
+      <p>Contact support at earlywarningsyste@gmail.com or <a href= "https://www.earlywarningsys.net/contact">https://www.earlywarningsys.net/contact</a>.</p>
+    {% endif %}
+    {% if job_type == 'activation' %}
+      <p>This message was delivered to you by The Early Warning System. <a href="https://www.earlywarningsys.net/login">https://www.earlywarningsys.net</a>. Created by: Matti Päivike</p>
+      <p>Contact support at earlywarningsyste@gmail.com or <a href= "https://www.earlywarningsys.net/contact">https://www.earlywarningsys.net/contact</a>.</p>
+    {% endif %}
+    <br>
+    {% if job_type == 'New_App' %}
+      <p>This message was delivered to you by The Early Warning System. <a href="https://www.earlywarningsys.net/login">https://www.earlywarningsys.net</a>. Created by: Matti Päivike</p>
+      <p>If you would like to stop receiving emails from this service then just sign in at: <a href="https://www.earlywarningsys.net/login">https://www.earlywarningsys.net/login</a> and delete your account.<p>
+      <p>Contact support at earlywarningsyste@gmail.com or <a href= "https://www.earlywarningsys.net/contact">https://www.earlywarningsys.net/contact</a>.</p>
+    {% endif %}
+    {% if job_type == 'announcement' %}
+      <p>This message was delivered to you by The Early Warning System. <a href="https://www.earlywarningsys.net/login">https://www.earlywarningsys.net</a>. Created by: Matti Päivike</p>
+      <p>If you would like to stop receiving emails from this service then just sign in at: <a href="https://www.earlywarningsys.net/login">https://www.earlywarningsys.net/login</a> and delete your account.<p>
+      <p>Contact support at earlywarningsyste@gmail.com or <a href= "https://www.earlywarningsys.net/contact">https://www.earlywarningsys.net/contact</a>.</p>
+    {% endif %}
+  </div>
+</body>
+</html>

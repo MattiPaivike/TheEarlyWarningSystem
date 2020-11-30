@@ -13,7 +13,15 @@ import sys
 import ssl
 import requests
 import json
+import os
+import platform
+from datetime import datetime
 
+#script directory
 scriptdir = sys.path[0]
 
+#logfile directory
 logfiledir = str(scriptdir) + "/Logfiles/"
+
+#headers for web-crawler
+headers = {'User-Agent': 'TheEarlyWarningSystemBot https://earlywarningsys.net/about_bot'}

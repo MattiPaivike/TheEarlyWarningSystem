@@ -9,5 +9,6 @@ router.register('versions', views.SoftwareApi)
 urlpatterns = [
     path('', views.home, name='app-home'),
     path('about/', views.about, name='app-about'),
-    path('api/', include(router.urls))
+    path('about_bot/', views.about_bot, name='app-about_bot'),
+    path('api/', include(router.urls), name='app-api')
 ]

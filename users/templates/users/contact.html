@@ -1,0 +1,10 @@
+{% extends "main_app/base.html"%}
+{% block content %}
+  <form class="margin_top_30" method="POST">
+    {% csrf_token %}
+    <p>Found a bug? Would you like me to add some software here for tracking? Just contact me and I will take a look at it.<p>
+    {{ form.text }}
+    <br>
+    <button class="margin_top_15 button" type="submit">Send</button>
+  </form>
+{% endblock %}

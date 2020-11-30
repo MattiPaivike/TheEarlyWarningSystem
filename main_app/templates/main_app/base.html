@@ -1,113 +1,79 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<div class="wrapper">
-  <div id="main">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
   <meta name="description" content="">
-  <title>Early Warning System</title>
-  <!-- Bootstrap core CSS -->
-  <link href="{% static 'main_app/css/bootstrap.min.css' %}" rel="stylesheet">
-  <!--- scripts -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="{% static 'main_app/js/bootstrap.bundle.min.js' %}"></script>
-  <!-- Custom styles for this template -->
-  <link href="{% static 'main_app/css/style.css' %}" rel="stylesheet">
+  <meta name="msapplication-TileColor" content="#00a300">
+  <meta name="theme-color" content="#ffffff">
+  <title>The Early Warning System</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'main_app/apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'main_app/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'main_app/favicon-16x16.png' %}">
+  <link rel="manifest" href="{% static 'main_app/site.webmanifest' %}">
+  <link rel="mask-icon" href="{% static 'main_app/safari-pinned-tab.svg' %}" color="#5bbad5">
+  <link href="{% static 'main_app/css/style_new.css' %}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body class="bg-white">
-  <nav class="navbar-default navbar navbar-expand-lg navbar-dark bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
-      <ul class="navbar-nav">
-        {% if page == 'home' %}
-        <li class="nav-item active">
-        {% else %}
-        <li class="nav-item">
-        {% endif %}
-          <a class="nav-link" href="{% url 'app-home' %}">Home<span class="sr-only">(current)</span></a>
-        </li>
-        {% if page == 'about' %}
-        <li class="nav-item active">
-        {% else %}
-        <li class="nav-item">
-        {% endif %}
-          <a class="nav-link" href="{% url 'app-about' %}">About</a>
-        </li>
+<body>
+  <div class="landing">
+      <div class="landing_header">
+          <div class="tag">
+              <h1 class="name">The Early Warning System</h1>
+          </div>
+      </div>
+      <div id="navbar" class="menu_items">
+          <a href="javascript:void(0);" class="icon" onclick="NavBar()">
+            <i class="fa fa-bars"></i>
+          </a>
+          <a class="nav-link" href="{% url 'app-home' %}">[Home]</a>
+          <a class="nav-link" href="{% url 'app-about' %}">[About]</a>
         {% if user.is_authenticated %}
-        {% if page == 'profile' %}
-        <li class="nav-item active">
-        {% else %}
-        <li class="nav-item">
-        {% endif %}
-          <a class="nav-link" href="{% url 'profile' %}">Subscriptions</a>
-        </li>
+          <a class="nav-link" href="{% url 'contact' %}">[Contact]</a>
         {% endif %}
         {% if user.is_authenticated %}
-        {% if page == 'change_password' %}
-        <li class="nav-item active">
-        {% else %}
-        <li class="nav-item">
+          <a class="nav-link" href="{% url 'profile' %}">[Email notifications]</a>
         {% endif %}
-          <a class="nav-link" href="{% url 'change_password' %}">Account</a>
-        </li>
+        {% if user.is_authenticated %}
+          <a class="nav-link" href="{% url 'change_password' %}">[Account]</a>
         {% endif %}
         {% if user.is_authenticated == False %}
-        {% if page == 'login' %}
-        <li class="nav-item active">
-        {% else %}
-        <li class="nav-item">
-        {% endif %}
-          <a class="nav-link" href="{% url 'login' %}">Login</a>
-        </li>
+          <a class="nav-link" href="{% url 'login' %}">[Login]</a>
         {% endif %}
         {% if user.is_authenticated == False %}
-        {% if page == 'register' %}
-        <li class="nav-item active">
-        {% else %}
-        <li class="nav-item">
-        {% endif %}
-          <a class="nav-link" href="{% url 'register' %}">Register</a>
-        </li>
+          <a class="nav-link" href="{% url 'register' %}">[Register]</a>
         {% endif %}
         {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-        </li>
+          <a class="nav-link" href="{% url 'logout' %}">[Logout]</a>
         {% endif %}
-      </ul>
-    </div>
-  </nav>
-  <main role="main">
-    {% if messages %}
-    {% for message in messages %}
-    <div class="container alert alert-{{ message.tags }}">
-      {{ message }}
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% if page == 'home' %}
-    <div class="jumbotron">
-      <div class="container">
-        <h2>The Early Warning System</h2>
-        <p class="lead">... a web application that helps system administrators keep track of software updates for {{ appscount }} common enterprise applications. Choose which software updates
-          you would like to be notified of and the system will send an automated email for you once a new version is detected. You can also access all software data via an <a href="https://www.earlywarningsys.net/api/versions/">API</a>. All for free!</p>
-          <p><a class="btn btn-lg btn-success" href="{% url 'register' %}" role="button">Sign up today</a></p>
+          <a class="nav-link" href="https://www.earlywarningsys.net/api/versions/">[API]</a>
+      </div>
+      {% if messages %}
+      {% for message in messages %}
+      <div class="container alert alert-{{ message.tags }}">
+        {{ message }}
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% if page == 'home' %}
+        <div class="content">
+            <h2 class="margin_top_30">What is this?</h2>
+            <p class="lead">Third-party application patching is a common and potentially time-consuming issue in enterprise system administration.
+              The Early Warning System is a free <a href="https://github.com/MattiPaivike/TheEarlyWarningSystem">open source</a> webcrawler that is constantly monitoring the latest versions and
+              download urls for {{ appscount }} common enterprise applications.
+            <p>You can easily automate third-party application patching to SCCM/Intune with The Early Warning System <a href="https://www.earlywarningsys.net/api/versions/">API.</a> Check out our <a href="https://github.com/MattiPaivike/TheEarlyWarningSystem">example powershell scripts in github!</a> </p>
+            <p>You can also <a href="{% url 'register' %}">sign up</a> for free automated notification emails from The Early Warning System. Choose which software updates
+              you would like to be notified of and the system will send an automated email for you once a new version is detected. </p>
+            <p>More information about the Early Warning System and its creator can be found at the <a href="{% url 'app-about' %}">about page.</a>
+      {% endif %}
+            {% block content %}{% endblock %}
         </div>
-      </div>
-    {% endif %}
-      <div class="container">
-        {% block content %}{% endblock %}
-      </div>
-  </main>
-
-</div>
-</div>
-<footer class="footer text-center text-white">
-  <p>The Early Warning System</p>
-</footer>
+  </div>
 </body>
+  <!--- scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="{% static 'main_app/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'main_app/js/scripts.js' %}"></script>
 </html>

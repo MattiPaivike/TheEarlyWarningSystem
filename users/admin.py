@@ -4,7 +4,10 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.utils.translation import ugettext_lazy as _
 
-from .models import CustomUser
+from .models import CustomUser, Profile, Subscriptions
+
+admin.site.register(Profile)
+admin.site.register(Subscriptions)
 
 
 @admin.register(CustomUser)

@@ -1,22 +1,30 @@
 {% extends "main_app/base.html"%}
 {% block content %}
-  <h4 class="border-bottom border-gray pb-2 mb-2">About The Early Warning System:</h4>
-  <p>This tool was created to help system administrators keep track of common enterprise software updates. This automated system is constantly crawling software vendor websites for the latest version data. Once a new version of some software is detected an automated email is sent to the list of accounts who have subscribed to that specific software. Users can choose which application version changes they want to notified of. Users can change their "subscriptions" at any time.</p>
-  <h5>How often does the system check for version changes?</h5>
-  <p>The system checks vendor websites every 6 hours.</p>
-  <h5>Get the software information via API</h5>
-  <p>You can access the API from: <a href="https://www.earlywarningsys.net/api/versions/?format=json">this link.</a></p> <p>Below you will find an example of how to access the information via python script:</p>
-  <div class="card">
-  <div class="card-body">
-    <p class="card-text">import requests</p>
-    <p></p>
-    <p class="card-text">url = "https://www.earlywarningsys.net/api/versions/?format=json"<br>response = requests.get(url)<br>json = response.json()</p>
-    <p class="card-text">for key in json:<br>&nbsp;&nbsp;&nbsp;&nbsp;if key['software'] == 'Citrix Receiver':<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(key["version"])</p>
-    <p class="card-text">4.12</p>
-  </div>
-</div>
-  <h5 class="pt-4">About the author:</h5>
-  <p>I am a system administrator who has always wanted to learn web development. This is my first personal project.</p>
-  <h5>Contact:</h5>
-  <p>Found a bug? Would you like me to add some software here for tracking? Just contact me at <a href="mailto:earlywarningsyste@gmail.com">earlywarningsyste@gmail.com</a> and I will take a look at it.</p>
+{% load static %}
+  <h2 class="margin_top_30">About The Early Warning System:</h2>
+  <p>I originally created this tool as a personal project to learn web development. At first it was just an automated email system to help system administrators keep track of common enterprise application updates.
+    After creating the API I noticed that this could actually be extended and help a lot of people automate repetitive work.</p>
+  <p>Third-party application patching is a common and potentially time-consuming issue in enterprise system administration. My vision is to create a community run and trusted API that everyone can use to automate third-party application patching!</p>
+  <h2>API:</h2>
+  <p>Ideally you can use <a href="https://www.earlywarningsys.net/api/versions/">The Early Warning System API</a> to fully automate third-party patching in SCCM/Intune for free. You can write your own scripts to pull the data from the API or you can just use my powershell scripts from <a href="https://github.com/MattiPaivike/TheEarlyWarningSystem">github.</a></p>
+  <p><strong>Use The Early Warning System at your own risk. I take no responsiblity for any issues that it might cause. It is up to you to verify downloaded files and build proper security checks if you decide to use it.</strong></p>
+  <p><strong>This Project does not distribute Applications directly. It is just providing direct download links to the vendors own websites. Downloading the applications does not grant you a license for the software. Please ensure you are properly licensed for all software you package and distribute!</strong><p>
+  <h2>So how does it work again?:</h2>
+  <p>In a nutshell: This web application is reading the HTML of software vendor websites. Once changes are detected and a new version of tracked software is released it updates the database, api and emails all users about the new software.</p>
+  <h2>Source code:</h2>
+  <p>The Early Warning System has been made with the <a href="https://www.djangoproject.com">Django web-framework.</a> I have made this project open-source and you can find it in <a href="https://github.com/MattiPaivike/TheEarlyWarningSystem">github.</a></p>
+  <h2>Known issues:</h2>
+  <p>- Sometimes the HTML in the software vendor website changes in a way that the webcrawler stops working.
+  If this happens an automated email is sent to me and I will fix the issue, but this can understandably cause "outages".</p>
+  <p>- Unfortunately not all software vendors provide checksum data to verify downloaded files. This can potentially cause security issues. You should always verify the integrity of downloaded files.</p>
+  <h2>How often does the system check for version changes?</h2>
+  <p>The system checks vendor websites once every 24 hours./p>
+  <h2>About the author:</h2>
+  <p>My name is Matti Päivike. I have been working in the IT-industry as a System Administrator for over a decade. I love Python, Powershell and all things that can automate. Find me at my: <a href="https://mattipaivike.fi">Website</a>, <a href="https://twitter.com/MattiPaivike">Twitter</a> or <a href="https://github.com/MattiPaivike">Github.</a></p>
+  <h2>Contact:</h2>
+  <p>Want to contact me? Found a bug? Would you like me to add some software here for tracking? Just register an account and contant me from <a href="{% url 'contact' %}">here</a> and I will take a look at it. You can also contact me on <a href="https://twitter.com/MattiPaivike">Twitter</a>.</p>
+  <h2>Privacy policy:</h2>
+  <p>User information will never be shared with anyone. You will only receive emails for software update notifications and/or possible updates to the service.</p>
+  <h2>I dont want to receive emails from this service anymore:</h2>
+  <p>Sign in with your account and got to <a href="{% url 'profile_delete' %}">this page</a> and delete your account.</p>
 {% endblock %}

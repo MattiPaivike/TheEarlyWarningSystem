@@ -17,9 +17,15 @@ class Command(BaseCommand):
     help = 'Process all data'
 
     def add_arguments(self, parser):
-        parser.add_argument('appname', type=str, help='name of application')
-        parser.add_argument('highest', type=str, help='highest version')
-        parser.add_argument('url', type=str, help='application website')
+        parser.add_argument('appname', type=str, help='name of application', nargs='?', default="")
+        parser.add_argument('highest', type=str, help='highest version', nargs='?', default="")
+        parser.add_argument('dllink', type=str, nargs='?', default="")
+        parser.add_argument('dllink_x86', type=str, nargs='?', default="")
+        parser.add_argument('dllink_x64', type=str, nargs='?', default="")
+        parser.add_argument('checksum', type=str, nargs='?', default="")
+        parser.add_argument('checksum_x86', type=str, nargs='?', default="")
+        parser.add_argument('checksum_x64', type=str, nargs='?', default="")
+        parser.add_argument('checksum_type', type=str, nargs='?', default="")
 
     def handle(self, *args, **kwargs):
         #logging
@@ -31,9 +37,15 @@ class Command(BaseCommand):
         #arguments
         appname = kwargs['appname']
         highest = kwargs['highest']
-        url = kwargs['url']
+        dllink = kwargs['dllink']
+        dllink_x86 = kwargs['dllink_x86']
+        dllink_x64 = kwargs['dllink_x64']
+        checksum = kwargs['checksum']
+        checksum_x86 = kwargs['checksum_x86']
+        checksum_x64 = kwargs['checksum_x64']
+        checksum_type = kwargs['checksum_type']
 
-        logging.info('Starting data processer job for app: ' + appname + ' version: ' + highest + ' and url: ' + url)
+        logging.info('Starting data processer job for app: ' + appname + ' version: ' + highest)
 
         #convert highest version to version item
         highest = ver.parse(highest)
@@ -65,6 +77,7 @@ class Command(BaseCommand):
                     current_version = ver.parse('0.0')
                     save_software = Software(name=appname)
                     save_software.save()
+
                 except Exception as err:
                     error_text = ' There was an error writing in to the database: ' + str(err) + ' The script will stop running.'
                     logging.info(error_text)
@@ -103,9 +116,37 @@ class Command(BaseCommand):
                 #finally save the new version
                 save_version = Version(version=str(highest), software=software_name)
                 save_version.save()
+
+                ############################################
+                ##update Dllink and/or checksums to database
+
+                versionset = software_name.version_set.last()
+
+                if dllink:
+                    versionset.dllink = dllink
+
+                if dllink_x86:
+                    versionset.dllink_x86 = dllink_x86
+
+                if dllink_x64:
+                    versionset.dllink_x64 = dllink_x64
+
+                if checksum:
+                    versionset.checksum = checksum
+
+                if checksum_x86:
+                    versionset.checksum_x86 = checksum_x64
+
+                if checksum_x64:
+                    versionset.checksum_x64 = checksum_x64
+
+                if dllink or dllink_x86 or dllink_x64 or checksum or checksum_x86 or checksum_x64:
+                    versionset.save()
+                ############################################
+
                 #send email
                 if initial_version != True:
-                    call_command('email', 'new_version', '', '', appname, str(highest), url, '', '')
+                    call_command('email', job_type=new_version, app_name=appname, app_version=str(highest), dllink=dllink, dllink_x86=dllink_x86, dllink_x64=dllink_x64)
                 else:
                     logging.info('This appears to be an initial version entry. Will not send email')
             else:
@@ -113,4 +154,4 @@ class Command(BaseCommand):
 
         if Error_var == True:
             logging.info('Sending error email for data processer')
-            call_command('email', 'error', 'process_data', errors, appname, '', '', '', '')
+            call_command('email', job_type="error", error_type=process_data, errors=errors, app_name=appname)
