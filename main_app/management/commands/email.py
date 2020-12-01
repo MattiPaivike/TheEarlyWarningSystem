@@ -168,9 +168,9 @@ class Command(BaseCommand):
             for email_rec in email_list:
                 custom_log("Sending email to: " + str(email_rec))
                 if job_type != "announcement":
-                    html_message = render_to_string('main_app\mail_template.html', locals())
+                    html_message = render_to_string('main_app' +  path_part + 'mail_template.html', locals())
                 else:
-                    html_message = render_to_string('main_app\mail_template_announcement.html', locals())
+                    html_message = render_to_string('main_app' + path_part + 'mail_template_announcement.html', locals())
                 body_stripped = strip_tags(html_message)
                 from_email = 'noreply@earlywarningsys.net'
                 to = email_rec
