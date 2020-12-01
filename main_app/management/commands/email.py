@@ -99,6 +99,12 @@ class Command(BaseCommand):
 
         admin_email = config['ADMIN_EMAIL']
 
+        #get operating System and define paths
+        if platform.system() == 'Windows':
+            path_part = '\\'
+        else:
+            path_part = '/'
+
         custom_log('Starting email function with the following arguments. Job type: ' + job_type + ' Activationkey: ' + activation_key + ' Error type: ' + error_type + ' Errors: ' + str(errors) + ' App_name: ' + app_name + ' App_version ' + app_version)
         email_list = []
         if job_type == "new_version":
