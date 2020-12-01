@@ -10,7 +10,7 @@ def custom_log(message):
         path_log = '\\logging\\'
         path_part = '\\'
     else:
-        path_log = '\\logging/'
+        path_log = '/logging'
         path_part = '/'
 
     #define logfilename
