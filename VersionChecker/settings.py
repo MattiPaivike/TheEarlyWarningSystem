@@ -32,9 +32,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config['SECRET_KEY']
 
-
-DEBUG = False
-ALLOWED_HOSTS = ['178.62.240.252', 'www.earlywarningsys.net', 'earlywarningsys.net']
+# SECURITY WARNING: don't run with debug turned on in production!
+if os.environ.get('DJANGO_DEVELOPMENT') == "True":
+    DEBUG = True
+    ALLOWED_HOSTS = ['127.0.0.1']
+else:
+    DEBUG = False
+    ALLOWED_HOSTS = ['178.62.240.252', 'www.earlywarningsys.net', 'earlywarningsys.net']
 
 
 # Application definition
@@ -89,17 +93,24 @@ WSGI_APPLICATION = 'VersionChecker.wsgi.application'
 dbuser = config['DBUSER']
 dbpass = config['DBPASS']
 
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'versionchecker',
-        'USER': dbuser,
-        'PASSWORD': dbpass,
-        'HOST': 'localhost',
-        'PORT': '',
+if os.environ.get('DJANGO_DEVELOPMENT') == "True":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'versionchecker',
+            'USER': dbuser,
+            'PASSWORD': dbpass,
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -137,8 +148,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_URL = '/static/'
+if os.environ.get('DJANGO_DEVELOPMENT') == "True":
+    STATIC_URL = '/static/'
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    STATIC_URL = '/static/'
 
 #EMAIL settings
 EMAIL_HOST = config['EMAIL_HOSTNAME']
