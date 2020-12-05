@@ -36,7 +36,7 @@ SECRET_KEY = config['SECRET_KEY']
 if os.environ.get('DJANGO_DEVELOPMENT') == "True":
     DEBUG = True
     ALLOWED_HOSTS = ['127.0.0.1']
-else:
+elif os.environ.get('DJANGO_DEVELOPMENT') == "false":
     DEBUG = False
     ALLOWED_HOSTS = ['178.62.240.252', 'www.earlywarningsys.net', 'earlywarningsys.net']
 
@@ -100,7 +100,7 @@ if os.environ.get('DJANGO_DEVELOPMENT') == "True":
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-else:
+elif os.environ.get('DJANGO_DEVELOPMENT') == "false":
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -145,12 +145,20 @@ USE_L10N = True
 USE_TZ = True
 
 
+#rest framework authentication settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+}
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 if os.environ.get('DJANGO_DEVELOPMENT') == "True":
     STATIC_URL = '/static/'
-else:
+elif os.environ.get('DJANGO_DEVELOPMENT') == "false":
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
     STATIC_URL = '/static/'
 
