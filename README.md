@@ -1,7 +1,14 @@
 # The Early Warning System
 
-Try it at: https://www.earlywarningsys.net
+Live website at: https://www.earlywarningsys.net
 
-This tool was created to help system administrators keep track of common enterprise software updates. This automated system is constantly crawling software vendor websites for the latest version data. Once a new version is detected an automated email is sent to the list of accounts who have subscribed to that specific software. Users can choose which application version changes they want to notified of. Users can change their subscriptions at any time.
+Third-party application patching is a common and potentially time-consuming issue in enterprise system administration.
+The Early Warning System is a free webcrawler that is constantly monitoring the latest versions and download urls for common enterprise applications.
 
-The tool was made with DJANGO
+# Features:
+- Automated emails sent to users about application updates. Users can choose which application version changes they want to notified of.
+- API that can be used to get application information for your own automation solutions.
+
+# Contributions:
+If you would like to improve the service, your help is very welcome. If you want to add more applications for tracking then remember that the crawler needs
+to be compliant with that websites robots.txt!
