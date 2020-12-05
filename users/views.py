@@ -20,7 +20,8 @@ def register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             temp_mail = form.cleaned_data['email']
-            banned_domains = ["gmail.com","hotmail.com","yahoo.com"]
+            banned_domains = []
+            #banned_domains = ["gmail.com","hotmail.com","yahoo.com"]
 
             #payload
             datas={}
