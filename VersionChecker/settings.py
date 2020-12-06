@@ -36,10 +36,9 @@ SECRET_KEY = config['SECRET_KEY']
 if os.environ.get('DJANGO_DEVELOPMENT') == "True":
     DEBUG = True
     ALLOWED_HOSTS = ['127.0.0.1']
-elif os.environ.get('DJANGO_DEVELOPMENT') == "false":
+else:
     DEBUG = False
     ALLOWED_HOSTS = ['178.62.240.252', 'www.earlywarningsys.net', 'earlywarningsys.net']
-
 
 # Application definition
 
@@ -100,7 +99,7 @@ if os.environ.get('DJANGO_DEVELOPMENT') == "True":
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-elif os.environ.get('DJANGO_DEVELOPMENT') == "false":
+else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -158,7 +157,7 @@ REST_FRAMEWORK = {
 
 if os.environ.get('DJANGO_DEVELOPMENT') == "True":
     STATIC_URL = '/static/'
-elif os.environ.get('DJANGO_DEVELOPMENT') == "false":
+else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
     STATIC_URL = '/static/'
 
