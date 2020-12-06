@@ -90,7 +90,13 @@ class Command(BaseCommand):
                     save_software = Software(name=appname)
                     save_software.save()
                 else:
-                    initial_version = False
+                    current_version_check = software_name.version_set.last()
+                    if current_version_check:
+                        initial_version = False
+                    else:
+                        initial_version = True
+                        #delete software if no version is found and go to initial version process
+                        software_name.delete()
 
                 #get initial data for crawler
                 try:
@@ -153,7 +159,6 @@ class Command(BaseCommand):
                         custom_log('This appears to be an initial version entry for application: ' + appname + ' saving version: ' + str(highest) + ' to the database.')
                         save_version = Version(version=str(highest), software=software_name)
                         save_version.save()
-                        #save initial dllinks/checksums to the database
 
                     if initial_version == False:
                         #get latest version from database
@@ -166,7 +171,7 @@ class Command(BaseCommand):
                         if highest <= current_version:
                             custom_log("The detected version: " + str(highest) + " for application: " + appname + "." + " Was not greater than the current version: " + str(current_version))
                         if highest > current_version:
-                            custom_log("New version: " + str(highest) + " detected for: " + appname + "." + " The old version was: " + str(current_version))
+                            custom_log("New version: " + str(highest) + " detected for: " + appname + "." + " and it was considered higher than the old version: " + str(current_version))
                     elif initial_version == True:
                         #set temporary version for initial version entry
                         current_version = verparse.parse("0.1")
