@@ -36,6 +36,10 @@ def crawl_version(data):
     version = data["name"]
     version = version.replace("Git for Windows ","")
 
+    if "(" in str(version):
+        version = version.replace("(",".")
+        version = version.replace(")","")
+
     versions_list.append(version)
 
     return versions_list
