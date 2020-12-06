@@ -15,6 +15,8 @@ find_checksum_x86 = False
 find_checksum_x64 = False
 
 checksum_type = ""
+
+New_App = False
 #################################
 
 def crawl_data(url):
