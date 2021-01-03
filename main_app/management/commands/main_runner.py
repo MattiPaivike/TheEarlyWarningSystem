@@ -90,6 +90,7 @@ class Command(BaseCommand):
                     save_software = Software(name=appname)
                     save_software.save()
                 else:
+                    software_name = Software.objects.get(name=appname)
                     current_version_check = software_name.version_set.last()
                     if current_version_check:
                         initial_version = False
@@ -322,13 +323,14 @@ class Command(BaseCommand):
                             Error_var = True
                         #send email
                         if initial_version != True and Error_var != True:
-                            call_command('email', job_type="new_version", app_name=appname, app_version=str(highest), dllink=dllink, dllink_x86=dllink_x86, dllink_x64=dllink_x64, checksum=checksum, checksum_x86=checksum_x86, checksum_x64=checksum_x64)
+                            print("placeholder")
+                            #call_command('email', job_type="new_version", app_name=appname, app_version=str(highest), dllink=dllink, dllink_x86=dllink_x86, dllink_x64=dllink_x64, checksum=checksum, checksum_x86=checksum_x86, checksum_x64=checksum_x64)
 
                         if initial_version == True:
                             custom_log('This appears to be an initial version entry. Will not send email')
                             if New_App == True:
                                 custom_log('This appears to be a New_App, sending announcement email.')
-                                call_command('email', job_type="New_App", app_name=appname,)
+                                #call_command('email', job_type="New_App", app_name=appname,)
 
                 if Error_var == True:
                     custom_log('Sending error email')

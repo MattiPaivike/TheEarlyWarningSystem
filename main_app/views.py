@@ -12,7 +12,7 @@ from rest_framework.views import APIView
 from .serializers import SoftwareSerializer
 
 class SoftwareApi(APIView):
-    permission_classes = (IsAuthenticated,)
+    #permission_classes = (IsAuthenticated,)
     serializer_class = SoftwareSerializer
     def get(self, request):
         queryset = Version.objects.all()

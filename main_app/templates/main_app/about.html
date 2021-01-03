@@ -2,19 +2,17 @@
 {% block content %}
 {% load static %}
   <h2>About the author:</h2>
-  <p>My name is Matti Päivike. I have been working in the IT-industry as a System Administrator for over a decade. I love Python, Powershell and all things that can automate. Find me at my: <a href="https://mattipaivike.fi">Website</a>, <a href="https://twitter.com/MattiPaivike">Twitter</a> or <a href="https://github.com/MattiPaivike">Github.</a></p>
+  <p>I am a 30 something system administrator living in Finland.</p>
   <h2 class="margin_top_30">History:</h2>
   <p>I originally created this tool as a personal project to learn web development. At first it was just an automated email system to help system administrators keep track of common enterprise application updates.
     After creating the API I noticed that this could actually be extended and help a lot of people automate repetitive work.</p>
   <p>My vision is to create a community run and trusted API that everyone can use to automate third-party application patching!</p>
   <h2>API:</h2>
-  <p>Ideally you can use <a class="nav-link" href="{% url 'app-api' %}">The Early Warning System API</a> to fully automate third-party patching in SCCM/Intune for free. You can write your own scripts to pull the data from the API or you can just use my powershell scripts from <a href="https://github.com/MattiPaivike/TheEarlyWarningSystem">github.</a></p>
+  <p>Ideally you can use <a class="nav-link" href="{% url 'app-api' %}">The Early Warning System API</a> to fully automate third-party patching in SCCM/Intune for free. You can write your own scripts to pull the data from the API.</p>
   <p><strong>Use The Early Warning System at your own risk. I take no responsiblity for any issues that it might cause. It is up to you to verify downloaded files and build proper security checks if you decide to use it.</strong></p>
   <p><strong>This Project does not host Applications directly. It is just providing direct download links to the vendors own websites. Downloading the applications does not grant you a license for the software. Please ensure you are properly licensed for all software you package and distribute!</strong><p>
   <h2>So how does it work again?:</h2>
   <p>In a nutshell: This web application is reading the HTML of software vendor websites. Once changes are detected and a new version of tracked software is released it updates the database, api and emails all users about the new software.</p>
-  <h2>Source code:</h2>
-  <p>The Early Warning System has been made with the <a href="https://www.djangoproject.com">Django web-framework.</a> I have made this project open-source and you can find it in <a href="https://github.com/MattiPaivike/TheEarlyWarningSystem">github.</a></p>
   <h2>Known issues:</h2>
   <p>- Sometimes the HTML in the software vendor website changes in a way that the webcrawler stops working.
   If this happens an automated email is sent to me and I will fix the issue, but this can understandably cause "outages".</p>
@@ -22,7 +20,7 @@
   <h2>How often does the system check for version changes?</h2>
   <p>The system checks vendor websites once every 24 hours.</p>
   <h2>Contact:</h2>
-  <p>Want to contact me? Found a bug? Would you like me to add some software here for tracking? Just register an account and contant me from <a href="{% url 'contact' %}">here</a> and I will take a look at it. You can also contact me on <a href="https://twitter.com/MattiPaivike">Twitter</a>.</p>
+  <p>Want to contact me? Found a bug? Would you like me to add some software here for tracking? Just register an account and contant me from <a href="{% url 'contact' %}">here</a> and I will take a look at it.</p>
   <h2>What is my email address used for:</h2>
   <p>User information will never be shared with anyone. You will only receive emails for software update notifications and/or possible updates to the service.</p>
   <h2>I dont want to receive emails from this service anymore:</h2>
